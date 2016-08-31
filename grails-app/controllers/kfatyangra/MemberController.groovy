@@ -33,8 +33,12 @@ class MemberController {
             respond memberInstance.errors, view: 'create'
             return
         }
+        else{
+            memberInstance.save flush: true
+            render(view: '../login/login')
+        }
 
-        memberInstance.save flush: true
+
 
         request.withFormat {
             form {

@@ -101,4 +101,8 @@ class InsecticideController {
             '*'{ render status: NOT_FOUND }
         }
     }
+    def calculator(){
+        def plant = Plant.get(Integer.parseInt(params.plantId))
+
+    }
 }
