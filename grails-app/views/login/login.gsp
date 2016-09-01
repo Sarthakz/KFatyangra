@@ -1,24 +1,28 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Sushant
-  Date: 8/31/2016
-  Time: 7:25 PM
---%>
 
-<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title></title>
-</head>
 
+    <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'login.css')}">
+    %{--<link rel="stylesheet" type="text/css" href="${resource(dir: 'media/css', file: 'jquery.dataTables.css')}">--}%
+
+    %{--javascript files--}%
+    %{--<script type="text/javascript" src="${resource(dir: 'js',file: 'jquery-1.12.0.min.js')}"></script>--}%
+    %{--<script src="${resource(dir: 'js',file: 'bootstrap.min.js')}" type="text/javascript"></script>--}%
+    %{--<script src="${resource(dir: 'js',file: 'hiker.js')}" type="text/javascript"></script>--}%
+    %{--<script src="${resource(dir: 'js',file: 'hike.js')}" type="text/javascript"></script>--}%
+    %{--<script--}%
+</head>
 <body>
-    <g:link controller="member" action="create"><button name="create" >Create</button> </g:link>
-    <div id="login">
-        <g:form controller="login" action="login">
-            <g:textField name="username" id="username"/>
-            <g:passwordField name="password" id="password"/>
-            <g:submitButton name="submit" value="Submit"/>
-        </g:form>
+
+<div class="login-page">
+    <div class="form">
+        <form class="login-form">
+            <input type="text" placeholder="username"/>
+            <input type="password" placeholder="password"/>
+            <button>login</button>
+
+        </form>
     </div>
+</div>
 </body>
 </html>
