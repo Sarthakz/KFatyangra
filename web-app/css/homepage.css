@@ -1,0 +1,22 @@
+body {
+
+    font-family: "Comic Sans MS", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.row{
+    height: 70px;
+}
+
+.head{
+    background-color:#4CAF50! important;
+    color: #f6f1ed! important;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+
+}
+
+.button{
+    width: 94px;
+    height: 24px;
+}
