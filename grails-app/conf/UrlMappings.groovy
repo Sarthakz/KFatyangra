@@ -7,7 +7,7 @@ class UrlMappings {
             }
         }
 
-        "/"(view:"/layouts/homePage")
+        "/"(view:"main")
         "500"(view:'/error')
 	}
 }
