@@ -1,10 +1,15 @@
 <html>
 <head>
 
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
+	<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
+
+
+	%{--javascript files--}%
+
+	<script src="${resource(dir: 'js',file: 'bootstrap.min.js')}" type="text/javascript"></script>
+	<script src="${resource(dir: 'js',file: 'jquery.js')}" type="text/javascript"></script>
+
+	<style>
   .head{
     background-color:#4CAF50! important;
     color: #f6f1ed! important;
