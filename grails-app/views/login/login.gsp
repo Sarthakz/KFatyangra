@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <g:createLink controller="member" action="create"/>
+    <g:link controller="member" action="create"><button name="create" >Create</button> </g:link>
     <div id="login">
         <g:form controller="login" action="login">
             <g:textField name="username" id="username"/>
