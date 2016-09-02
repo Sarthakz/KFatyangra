@@ -18,7 +18,7 @@ class InsecticideController {
     def show() {
         println "--------"+params
         def insecticideInstance = Insecticide.get(params.id as long)
-        respond insecticideInstance
+        [insecticideInstance:insecticideInstance]
     }
 
     def create() {
