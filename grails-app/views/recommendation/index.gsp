@@ -11,7 +11,23 @@
 
     <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
     <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'test.css')}">
+    <style>
+    .head{
+        background-color:#4CAF50! important;
+        color: #f6f1ed! important;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
 
+    }
+    .scroll{
+        max-height:200px; /*example*/
+        overflow: auto;
+    }
+    .table{
+        border-collapse: collapse;
+        border: 1px solid black;
+    }
+
+    </style>
 
     %{--javascript files--}%
 
@@ -53,11 +69,9 @@
     <div class="col-md-2">
         <button onclick="calculateSimilarities();">Recommend </button>
     </div>
-    <div class="col-md-4"></div>
-    <div id="example">
+    <div class="col-md-4 scroll" id="example">
         <input type="text">
     </div>
-    <div class="col-md-1"></div>
 </div>
 
 
