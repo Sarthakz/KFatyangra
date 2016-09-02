@@ -21,6 +21,15 @@
         font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
 
     }
+        .scroll{
+            max-height:200px; /*example*/
+            overflow: auto;
+        }
+        .table{
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+
     </style>
 
 
@@ -50,16 +59,19 @@
     <div class="col-md-2">
         <button>TEST </button>
     </div>
-    <div class="col-md-4">
-        <table>
-            <td>
-                <input type="text">
-            </td>
+    <div class="col-md-4 scroll" >
+        <table border="2px" width="300px" class= "table table-hover">
+
+            <g:each in="${['Cat', 'Dog','asd','asdf','asdf','asd','asd','asd','wr']}">
+                <tr  class="success">
+                <td>Animal: ${it} </td>
+                <tr>
+            </g:each>
+
         </table>
     </div>
 
-    <div class="col-md-1"></div>
-</div>
+    <div class="col-md-1"></div></div>
 
 
 
