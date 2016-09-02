@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <link rel='stylesheet' href='css/test.css' type='text/css' />
+
 
 
 </head>
@@ -42,8 +42,14 @@
     <div class="col-md-2">
         <button>TEST </button>
     </div>
-    <div class="col-md-4"></div>
-    <input type="text">
+    <div class="col-md-4">
+        <table>
+            <td>
+                <input type="text">
+            </td>
+        </table>
+    </div>
+
     <div class="col-md-1"></div>
 </div>
 
