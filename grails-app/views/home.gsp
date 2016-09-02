@@ -14,6 +14,14 @@
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
+    <style>
+    .head{
+        background-color:#4CAF50! important;
+        color: #f6f1ed! important;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+
+    }
+    </style>
 
 
 </head>
