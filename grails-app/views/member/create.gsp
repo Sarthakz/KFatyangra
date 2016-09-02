@@ -30,26 +30,26 @@ width:560px;
 </div>
 <div class="container">
 <legend>Add New Member</legend>
-<form >
+<g:form url="[resource:memberInstance, action:'save']">
   <div class="form-group">
     <label >Full Name</label>
-    <input type="text" class="form-control" name="fullname">
+    <input type="text" class="form-control" name="fullName" value="${memberInstance?.fullName}">
   </div>
   <div class="form-group">
     <label >User Name</label>
-    <input type="text" class="form-control" name="username">
+    <input type="text" class="form-control" name="username" value="${memberInstance?.username}">
   </div>
   <div class="form-group">
     <label>Password</label>
-    <input type="password" class="form-control" id="password">
+    <input type="password" class="form-control" id="password" name="password" value="${memberInstance?.password}">
   </div>
   <div class="form-group">
     <label >Role</label>
-<g:select id="role" name="role.id" from="${kfatyangra.Role.list()}" optionKey="id" required="" value="${memberInstance?.role?.id}" class="many-to-one"/>
+<g:select id="role" name="role.id" from="${kfatyangra.Role.list()}" optionKey="id" optionValue="role" required="" value="${memberInstance?.role?.id}" class="many-to-one"/>
   </div>
-
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
+   <g:submitButton name="submit" class="btn btn-default">Submit</g:submitButton>
+  %{--<button type="submit" class="btn btn-default">Submit</button>--}%
+</g:form>
 
 
 			%{--<div class="formManage">--}%

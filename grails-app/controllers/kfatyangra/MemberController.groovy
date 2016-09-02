@@ -24,29 +24,20 @@ class MemberController {
 
     @Transactional
     def save(Member memberInstance) {
+        println "memberInstance = $memberInstance"
         if (memberInstance == null) {
+            println "er"
             notFound()
             return
         }
-
-        if (memberInstance.hasErrors()) {
-            respond memberInstance.errors, view: 'create'
-            return
-        }
         else{
-            memberInstance.save flush: true
+            println "refe"
+            memberInstance.save flush: true, failOnError: true
+            println "memberInstance?.fullName = $memberInstance?.fullName" + memberInstance?.username + memberInstance?.password
             render(view: '../login/login')
         }
 
 
-
-        request.withFormat {
-            form {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'memberInstance.label', default: 'Member'), memberInstance.id])
-                redirect memberInstance
-            }
-            '*' { respond memberInstance, [status: CREATED] }
-        }
     }
 
     def edit(Member memberInstance) {

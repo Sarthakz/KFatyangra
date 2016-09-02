@@ -15,7 +15,9 @@ class InsecticideController {
         respond Insecticide.list(params), model:[insecticideInstanceCount: Insecticide.count()]
     }
 
-    def show(Insecticide insecticideInstance) {
+    def show() {
+        println "--------"+params
+        def insecticideInstance = Insecticide.get(params.id as long)
         respond insecticideInstance
     }
 

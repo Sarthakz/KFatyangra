@@ -2,15 +2,17 @@ package kfatyangra
 
 class RecommendationController {
     def recommendService
-    def index() {}
+    def index() {
+        render (view: 'index')
+    }
 
     def recommend() {
-        def userId = session.getAttribute('id')
+        def userId = 1
         def user = Member.get(userId as long)
-//        RecommendService recommendService1 = new RecommendService();
-//           def plant =
-
-          def plant = recommendService.serviceMethod(params.plantId as long, user);
-
+        println params
+        def plant = recommendService.serviceMethod(params.plantId as long, user);
+        def insecticides = Insecticide.findAllByIdBetween(1 as long, 4 as long)
+        println "insecticides = $insecticides"
+        render(template: 'afterRecommendation', model: [list: insecticides])
     }
 }
