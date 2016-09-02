@@ -62,7 +62,7 @@
     <div class="col-md-4 scroll" >
         <table border="2px" width="300px" class= "table table-hover">
 
-            <g:each in="${['Cat', 'Dog','asd','asdf','asdf','asd','asd','asd','wr']}">
+            <g:each in="${['Cat', 'Dog','asd','asdf','asdf','asd','asd','wr']}">
                 <tr  class="success">
                 <td>Animal: ${it} </td>
                 <tr>
