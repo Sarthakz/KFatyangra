@@ -70,7 +70,7 @@
         <button onclick="calculateSimilarities();">Recommend </button>
     </div>
     <div class="col-md-4 scroll" id="example">
-        <input type="text">
+        <input type="text" value="List will be shown here">
     </div>
 </div>
 
