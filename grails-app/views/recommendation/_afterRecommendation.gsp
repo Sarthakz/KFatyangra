@@ -20,10 +20,17 @@
 </table>
 <table border="2px" width="300px" class= "table table-hover">
 
-    <g:each in="${list}" var="insecticide">
+    <g:if test="${list}">
+        <g:each in="${list}" var="insecticide">
+            <tr class="success">
+                <td><g:link controller="insecticide" action="show" id="${insecticide.id}"><button>${insecticide?.name}</button></g:link></td>
+            </tr>
+        </g:each>
+    </g:if>
+    <g:else>
         <tr class="success">
-           <td><g:link controller="insecticide" action="show" id="${insecticide.id}"><button>${insecticide?.name}</button></g:link></td>
+            <td><b>No List Sorry!!!</b></td>
         </tr>
-    </g:each>
+    </g:else>
 
 </table>

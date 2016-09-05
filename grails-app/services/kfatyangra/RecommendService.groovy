@@ -7,40 +7,55 @@ class RecommendService {
 
     def serviceMethod(plantid,member) {
         def plant = Plant.get(plantid as long)
-        def userGroup = [:]
-        def userGroup1 = [:]
         def insecticideGroup = [:]
-        def insecticides = PlantInsecticide.findAllByPlantAndMember(plant,member)
-        def insecticideList = Rating.findAllByInsecticideInListAndMember(insecticides?.insecticide,member)
-        insecticideList.each{insect ->
-            insecticideGroup[insect?.insecticideId] = insect?.rating
-        }
-        userGroup[member?.id] = insecticideGroup
-        def otherMember = Member.findAllByIdNotEqual(member?.id)
-        otherMember.each{ itMember ->
-            def insecticideGroup1 = [:]
-            def insecticideList1 = Rating.findAllByInsecticideInListAndMember(insecticides?.insecticide,itMember)
-            if(insecticideList1){
-                insecticideList1.each{
-                    insecticideGroup1[it?.insecticide?.id] = it?.rating
-                }
-                userGroup1[itMember?.id] = insecticideGroup1
+        def insecticides = PlantInsecticide.findAllByPlant(plant)?.insecticide.unique()
+        def firstKey
+        int size=0
+            def sizeInsect = [:]
+        insecticides.each{  insect ->
+            def userGroup = [:]
+            def insecticideList = Rating.findAllByInsecticide(insect)
+            if(size < insecticideList.size()){
+                size =  insecticideList.size()
+                firstKey = insect?.id
             }
-            else{
-                userGroup1[itMember?.id] = null
+            insecticideList.each{  listValue ->
+                userGroup[listValue?.memberId] = listValue?.rating
+            }
+            insecticideGroup[insect?.id] = userGroup
+            sizeInsect[insect?.id] = insecticideList.size()
+        }
+        println insecticideGroup
+        def keys =  insecticideGroup.keySet()
+        println keys
+        def rList = [:]
+        rList[firstKey] = 0.00
+        keys.each{ key->
+            if(key!=firstKey){
+                rList[key]=correlationCalculator(insecticideGroup[firstKey],insecticideGroup[key], firstKey, key)
             }
         }
-        def keys = userGroup1.keySet()
-        def rList = []
-        keys.each{
-            rList.add(correlationCalculator(insecticideGroup,userGroup1[it],it))
+        def values = rList.values()
+        int i = 0
+        boolean choiceOne
+        values.each{
+            if(it == 0.00){
+                i++
+            }
         }
-        rList.each{
-            println "------------------->" + it
-        }
-    }
-    def correlationCalculator(user1, user2, user2Key){
 
+        if(i == values.size()){
+            sizeInsect = sizeInsect.sort { -it.value }
+            return sizeInsect
+        }
+        else{
+            rList = rList.sort{ -it.value }
+            return rList
+        }
+//        println '===========' + rList.sort { -it.value }
+    }
+    def correlationCalculator(user1, user2, firstKey, key){
+        println  firstKey + " - " + key
         def keyList1 = user1?.keySet()
         def keyList2 = user2?.keySet()
         def sameKey  = []
@@ -63,31 +78,25 @@ class RecommendService {
             double sum2Sq = 0.00
             double pSum = 0.00
             sameKey.each{ same->
-                println user1[same]+"--" +user2Key  +"----"+ user2[same]
                 sum1 += user1[same]
                 sum1Sq = sum1Sq +(user1[same].toString().toDouble() * user1[same].toString().toDouble())
                 sum2 += user2[same].toString().toDouble()
                 sum2Sq = sum2Sq +(user2[same].toString().toDouble() * user2[same].toString().toDouble())
                 pSum = pSum + (user1[same].toString().toDouble() * user2[same].toString().toDouble())
             }
-//            keys.each { same ->
-//                println same
-//                println user1.getAt('same') +"--" +user2Key  + user2.getAt('same')
-//                sum1 += user1[same]
-//                sum1Sq = sum1Sq +(user1[same].toString().toDouble() * user1[same].toString().toDouble())
-//                sum2 += user2[same].toString().toDouble()
-//                sum2Sq = sum2Sq +(user2[same].toString().toDouble() * user2[same].toString().toDouble())
-//                pSum = pSum + (user1[same].toString().toDouble() * user2[same].toString().toDouble())
-//            }
             def num=(pSum-(sum1*sum2/sameKey.size()))
+            if(num == 0){
+                return 0.00
+            }
+//            println "num = $num"
             def den = Math.sqrt(((sum1Sq-(sum1 * sum1))*(sum2Sq-(sum2 * sum2))).doubleValue())
-            println den
-            if(den < 1 && den > -1){
-                println "eneter"
+//            println "den = $den"
+            if(den == 0 ){
                 return 0.00
             }
 
             def r = num/den
+//            println "r = $r"
             return r
 
         }

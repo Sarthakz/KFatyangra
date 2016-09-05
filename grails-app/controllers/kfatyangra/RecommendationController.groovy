@@ -11,8 +11,17 @@ class RecommendationController {
         def user = Member.get(userId as long)
         println params
         def plant = recommendService.serviceMethod(params.plantId as long, user);
-        def insecticides = Insecticide.findAllByIdBetween(1 as long, 4 as long)
-        println "insecticides = $insecticides"
+        def keys
+        def insecticides = []
+        if(plant){
+            keys = plant.keySet()
+            keys.each{ key ->
+                insecticides.add(Insecticide.findById(key as long))
+            }
+        }
+        else{
+            insecticides = null
+        }
         render(template: 'afterRecommendation', model: [list: insecticides])
     }
 }
