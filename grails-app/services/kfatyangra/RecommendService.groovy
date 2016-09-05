@@ -54,7 +54,7 @@ class RecommendService {
             }
         }
         if(sameKey.size()<1){
-            return 0
+            return 0.00
         }
         else{
             double sum1 = 0.00
@@ -81,6 +81,7 @@ class RecommendService {
 //            }
             def num=(pSum-(sum1*sum2/sameKey.size()))
             def den = Math.sqrt(((sum1Sq-(sum1 * sum1))*(sum2Sq-(sum2 * sum2))).doubleValue())
+            println den
             if(den < 1 && den > -1){
                 println "eneter"
                 return 0.00
