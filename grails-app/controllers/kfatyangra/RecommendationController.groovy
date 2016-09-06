@@ -17,10 +17,11 @@ class RecommendationController {
             keys = plant.keySet()
             keys.each{ key ->
                 def insecticide =  Insecticide.findById(key as long)
-                def plantObj = Plant.findById(params.plantId as long)
-                if(PlantInsecticide.findByInsecticideAndMemberAndPlant(insecticide,user,plantObj)){
-                    insecticides.add(insecticide)
-                }
+//                def plantObj = Plant.findById(params.plantId as long)
+//                if(PlantInsecticide.findByInsecticideAndMemberAndPlant(insecticide,user,plantObj)){
+//                    insecticides.add(insecticide)
+//                }
+                insecticides.add(insecticide)
             }
         }
         else{
