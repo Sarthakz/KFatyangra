@@ -24,7 +24,20 @@
 		margin-left: 1265px;
 	}
 
+
 	</style>
+	<script>
+		function checkRating(){
+			var rating = $("#rating").val();
+			if(rating){
+				return true
+			}
+			else{
+				alert("Please enter rating!!!");
+				return false;
+			}
+		}
+	</script>
 </head>
 
 <body>
@@ -35,7 +48,7 @@
 
 <div class="container">
 
-	<form >
+
 
 		<div class="form-group">
 			<label >Name:</label>
@@ -49,9 +62,15 @@
 			<label>Usage:</label>
 			<g:textArea class="form-control" rows="5" id="comment" value="${insecticideInstance?.usages}" name="usages"></g:textArea>
 		</div>
+		<g:form controller="insecticide" action="rating">
+			<label>Rating:</label>
+			<g:hiddenField name="insecticideId" id="insecticideId" value="${insecticideInstance?.id}"/>
+			<g:select name="rating" from="[1,2,3,4,5]" id="rating"/>
+			<g:submitButton name="submit" onclick="return checkRating();">Submit</g:submitButton>
+		</g:form>
 
 
-	</form>
+
 
 </div>
 </body>

@@ -7,8 +7,8 @@ class RecommendationController {
     }
 
     def recommend() {
-        def userId = 1
-        def user = Member.get(userId as long)
+        def usersId = 1
+        def user = Member.get(usersId as long)
         println params
         def plant = recommendService.serviceMethod(params.plantId as long, user);
         def keys

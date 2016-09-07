@@ -16,7 +16,6 @@ class InsecticideController {
     }
 
     def show() {
-        println "--------"+params
         def insecticideInstance = Insecticide.get(params.id as long)
         [insecticideInstance:insecticideInstance]
     }
@@ -106,5 +105,25 @@ class InsecticideController {
     def calculator(){
         def plant = Plant.get(Integer.parseInt(params.plantId))
 
+    }
+    @Transactional
+    def rating(){
+        def insecticide = Insecticide.findById(params.insecticideId as long)
+        println insecticide
+        def userId = session.getAttribute('id');
+        def user = Member.findById(userId as long)
+        println user
+        def isInsecticide = Rating.findByInsecticideAndMember(insecticide,user)
+        if(isInsecticide){
+            isInsecticide.rating = params.rating as long
+            isInsecticide.save flush: true, failOnError: true
+        }else{
+            Rating rating = new Rating()
+            rating.insecticide = insecticide
+            rating.member = user
+            rating.rating = params.rating as long
+            rating.save flush: true, failOnError: true
+        }
+        redirect(controller: 'recommendation', action: 'index')
     }
 }
