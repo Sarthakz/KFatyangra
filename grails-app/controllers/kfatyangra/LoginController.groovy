@@ -3,7 +3,7 @@ package kfatyangra
 class LoginController {
 
     def index() {
-        def foods = Food.list();
+        def plants = Plant.list();
 //        [plantList : plants]
         redirect(controller: 'recommendation', action: 'index')
     }

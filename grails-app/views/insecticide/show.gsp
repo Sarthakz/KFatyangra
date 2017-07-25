@@ -56,15 +56,15 @@
 		</div>
 		<div class="form-group">
 			<label >Description:</label>
-			<g:textArea name="description" class="form-control" rows="5" id="description" value="${itemInstance?.description}"></g:textArea>
+			<g:textArea name="description" class="form-control" rows="5" id="description" value="${insecticideInstance?.description}"></g:textArea>
 		</div>
 		<div class="form-group">
 			<label>Usage:</label>
-			<g:textArea class="form-control" rows="5" id="comment" value="${itemInstance?.usages}" name="usages"></g:textArea>
+			<g:textArea class="form-control" rows="5" id="comment" value="${insecticideInstance?.usages}" name="usages"></g:textArea>
 		</div>
-		<g:form controller="item" action="rating">
+		<g:form controller="insecticide" action="rating">
 			<label>Rating:</label>
-			<g:hiddenField name="itemId" id="itemId" value="${itemInstance?.id}"/>
+			<g:hiddenField name="insecticideId" id="insecticideId" value="${insecticideInstance?.id}"/>
 			<g:select name="rating" from="[1,2,3,4,5]" id="rating"/>
 			<g:submitButton name="submit" onclick="return checkRating();">Submit</g:submitButton>
 		</g:form>

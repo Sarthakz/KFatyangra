@@ -1,6 +1,6 @@
 package kfatyangra
 
-class Food {
+class Plant {
     String name
 
     static constraints = {

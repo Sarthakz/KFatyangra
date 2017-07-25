@@ -5,35 +5,34 @@ import grails.transaction.Transactional
 @Transactional
 class RecommendService {
 
-    def serviceMethod(foodid, restaurantid, member) {
-        def food = Food.get(foodid as long)
-        def restaurant = Restaurant.get(restaurantid as long)
-        def itemGroup = [:]
-        def items = FoodItem.findAllByFoodAndRestaurant(food, restaurant)?.item.unique()
+    def serviceMethod(plantid,member) {
+        def plant = Plant.get(plantid as long)
+        def insecticideGroup = [:]
+        def insecticides = PlantInsecticide.findAllByPlant(plant)?.insecticide.unique()
         def firstKey
         int size=0
             def sizeInsect = [:]
-        items.each{  insect ->
+        insecticides.each{  insect ->
             def userGroup = [:]
-            def itemList = Rating.findAllByItem(insect)
-            if(size < itemList.size()){
-                size =  itemList.size()
+            def insecticideList = Rating.findAllByInsecticide(insect)
+            if(size < insecticideList.size()){
+                size =  insecticideList.size()
                 firstKey = insect?.id
             }
-            itemList.each{  listValue ->
+            insecticideList.each{  listValue ->
                 userGroup[listValue?.memberId] = listValue?.rating
             }
-            itemGroup[insect?.id] = userGroup
-            sizeInsect[insect?.id] = itemList.size()
+            insecticideGroup[insect?.id] = userGroup
+            sizeInsect[insect?.id] = insecticideList.size()
         }
-        println itemGroup
-        def keys =  itemGroup.keySet()
+        println insecticideGroup
+        def keys =  insecticideGroup.keySet()
         println keys
         def rList = [:]
         rList[firstKey] = 0.00
         keys.each{ key->
             if(key!=firstKey){
-                rList[key]=correlationCalculator(itemGroup[firstKey],itemGroup[key], firstKey, key)
+                rList[key]=correlationCalculator(insecticideGroup[firstKey],insecticideGroup[key], firstKey, key)
                 println rList[key]
             }
         }

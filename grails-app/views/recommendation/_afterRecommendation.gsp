@@ -21,9 +21,9 @@
 <table border="2px" width="300px" class= "table table-hover">
 
     <g:if test="${list}">
-        <g:each in="${list}" var="item">
+        <g:each in="${list}" var="insecticide">
             <tr class="success">
-                <td><g:link controller="insecticide" action="show" id="${item?.id}"><button>${item?.name}</button></g:link></td>
+                <td><g:link controller="insecticide" action="show" id="${insecticide.id}"><button>${insecticide?.name}</button></g:link></td>
             </tr>
         </g:each>
     </g:if>
