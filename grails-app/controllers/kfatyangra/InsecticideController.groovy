@@ -12,81 +12,81 @@ class InsecticideController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Insecticide.list(params), model:[insecticideInstanceCount: Insecticide.count()]
+        respond Item.list(params), model:[itemInstanceCount: Item.count()]
     }
 
     def show() {
-        def insecticideInstance = Insecticide.get(params.id as long)
-        [insecticideInstance:insecticideInstance]
+        def itemInstance = Item.get(params.id as long)
+        [itemInstance:itemInstance]
     }
 
     def create() {
-        respond new Insecticide(params)
+        respond new Item(params)
     }
 
     @Transactional
-    def save(Insecticide insecticideInstance) {
-        if (insecticideInstance == null) {
+    def save(Item itemInstance) {
+        if (itemInstance == null) {
             notFound()
             return
         }
 
-        if (insecticideInstance.hasErrors()) {
-            respond insecticideInstance.errors, view:'create'
+        if (itemInstance.hasErrors()) {
+            respond itemInstance.errors, view:'create'
             return
         }
 
-        insecticideInstance.save flush:true
+        itemInstance.save flush:true
 
         request.withFormat {
             form {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'insecticideInstance.label', default: 'Insecticide'), insecticideInstance.id])
-                redirect insecticideInstance
+                flash.message = message(code: 'default.created.message', args: [message(code: 'itemInstance.label', default: 'Items'), itemInstance.id])
+                redirect itemInstance
             }
-            '*' { respond insecticideInstance, [status: CREATED] }
+            '*' { respond itemInstance, [status: CREATED] }
         }
     }
 
-    def edit(Insecticide insecticideInstance) {
-        respond insecticideInstance
+    def edit(Item itemInstance) {
+        respond itemInstance
     }
 
     @Transactional
-    def update(Insecticide insecticideInstance) {
-        if (insecticideInstance == null) {
+    def update(Item itemInstance) {
+        if (itemInstance == null) {
             notFound()
             return
         }
 
-        if (insecticideInstance.hasErrors()) {
-            respond insecticideInstance.errors, view:'edit'
+        if (itemInstance.hasErrors()) {
+            respond itemInstance.errors, view:'edit'
             return
         }
 
-        insecticideInstance.save flush:true
+        itemInstance.save flush:true
 
         request.withFormat {
             form {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Insecticide.label', default: 'Insecticide'), insecticideInstance.id])
-                redirect insecticideInstance
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Item.label', default: 'Item'), itemInstance.id])
+                redirect itemInstance
             }
-            '*'{ respond insecticideInstance, [status: OK] }
+            '*'{ respond itemInstance, [status: OK] }
         }
     }
 
     @Transactional
-    def delete(Insecticide insecticideInstance) {
+    def delete(Item itemInstance) {
 
-        if (insecticideInstance == null) {
+        if (itemInstance == null) {
             notFound()
             return
         }
 
-        insecticideInstance.delete flush:true
+        itemInstance.delete flush:true
 
         request.withFormat {
             form {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Insecticide.label', default: 'Insecticide'), insecticideInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Item.label', default: 'Insecticide'), itemInstance.id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
@@ -96,30 +96,30 @@ class InsecticideController {
     protected void notFound() {
         request.withFormat {
             form {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'insecticideInstance.label', default: 'Insecticide'), params.id])
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'Item.label', default: 'Insecticide'), params.id])
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }
         }
     }
     def calculator(){
-        def plant = Plant.get(Integer.parseInt(params.plantId))
+        def plant = Food.get(Integer.parseInt(params.plantId))
 
     }
     @Transactional
     def rating(){
-        def insecticide = Insecticide.findById(params.insecticideId as long)
-        println insecticide
+        def item = Item.findById(params.insecticideId as long)
+        println item
         def userId = session.getAttribute('id');
         def user = Member.findById(userId as long)
         println user
-        def isInsecticide = Rating.findByInsecticideAndMember(insecticide,user)
+        def isInsecticide = Rating.findByItemAndMember(item,user)
         if(isInsecticide){
             isInsecticide.rating = params.rating as long
             isInsecticide.save flush: true, failOnError: true
         }else{
             Rating rating = new Rating()
-            rating.insecticide = insecticide
+            rating.item = item
             rating.member = user
             rating.rating = params.rating as long
             rating.save flush: true, failOnError: true

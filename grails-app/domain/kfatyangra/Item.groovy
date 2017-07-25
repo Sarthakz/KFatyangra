@@ -1,9 +1,8 @@
 package kfatyangra
 
-class Insecticide {
+class Item {
     String name
     String description
-    String usages
 
     static constraints = {
     }

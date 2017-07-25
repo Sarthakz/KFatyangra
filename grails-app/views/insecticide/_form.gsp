@@ -1,4 +1,4 @@
-<%@ page import="kfatyangra.Insecticide" %>
+<%@ page import="kfatyangra.Item" %>
 
 
 

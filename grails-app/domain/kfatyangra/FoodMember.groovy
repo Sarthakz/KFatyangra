@@ -1,9 +1,8 @@
 package kfatyangra
 
-class PlantInsecticide {
+class FoodMember {
     Member member
-    Plant plant
-    Insecticide insecticide
+    Food food
 
     static constraints = {
     }

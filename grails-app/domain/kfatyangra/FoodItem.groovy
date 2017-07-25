@@ -1,8 +1,11 @@
 package kfatyangra
 
-class PlantMember {
+class FoodItem {
     Member member
-    Plant plant
+    Food food
+    Item item
+
+    Restaurant restaurant
 
     static constraints = {
     }

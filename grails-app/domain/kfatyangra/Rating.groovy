@@ -3,7 +3,8 @@ package kfatyangra
 class Rating {
     Member member
     float rating
-    Insecticide insecticide
+    Item item
+    Restaurant restaurant
     static constraints = {
     }
 }
