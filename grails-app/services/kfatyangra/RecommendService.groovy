@@ -5,10 +5,11 @@ import grails.transaction.Transactional
 @Transactional
 class RecommendService {
 
-    def serviceMethod(plantid,member) {
+    def serviceMethod(plantid,restaurantId, member) {
         def plant = Plant.get(plantid as long)
+        def restaurant = Restaurant.get(restaurantId as long)
         def insecticideGroup = [:]
-        def insecticides = PlantInsecticide.findAllByPlant(plant)?.insecticide.unique()
+        def insecticides = PlantInsecticide.findAllByPlantAndRestaurant(plant,restaurant)?.insecticide.unique()
         def firstKey
         int size=0
             def sizeInsect = [:]

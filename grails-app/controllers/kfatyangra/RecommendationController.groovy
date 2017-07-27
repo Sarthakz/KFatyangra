@@ -10,7 +10,7 @@ class RecommendationController {
         def usersId = 1
         def user = Member.get(usersId as long)
         println params
-        def plant = recommendService.serviceMethod(params.plantId as long, user);
+        def plant = recommendService.serviceMethod(params.plantId as long,params.restaurantId as long, user);
         def keys
         def insecticides = []
         if(plant){
