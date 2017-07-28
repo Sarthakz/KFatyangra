@@ -36,8 +36,10 @@
     <script>
         function calculateSimilarities(){
             var plantId = $('#plants').val();
+            var restaurantId = $('#restaurant').val();
             var data = {
-                plantId : plantId
+                plantId : plantId ,
+                restaurantId: restaurantId
             }
             $.ajax({
                 url : '${createLink(controller: 'recommendation', action: 'recommend')}',
@@ -64,6 +66,9 @@
         %{--<g:select name="Dropdown" from="${['Text1', 'Test2', 'Test3']}"></g:select>--}%
         <div class="dropdown">
             <g:select name="plants" from="${kfatyangra.Plant.list()}" optionKey="id" optionValue="name" noSelection="['':' --Select Plant here-- ']" />
+        </div>
+        <div class="dropdown">
+            <g:select name="restaurant" from="${kfatyangra.Restaurant.list()}" optionKey="id" optionValue="name" noSelection="['':' --Select Restaurant here-- ']" />
         </div>
     </div>
     <div class="col-md-2">

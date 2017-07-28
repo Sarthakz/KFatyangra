@@ -56,7 +56,6 @@ class RecommendService {
         }
     }
     def correlationCalculator(user1, user2, firstKey, key){
-        println  firstKey + " ---------------------- " + key
         def keyList1 = user1?.keySet()
         def keyList2 = user2?.keySet()
         def sameKey  = []
@@ -86,15 +85,12 @@ class RecommendService {
                 pSum = pSum + (user1[same].toString().toDouble() * user2[same].toString().toDouble())
             }
             def num=(pSum-(sum1*sum2/sameKey.size()))
-            println "num = $num"
             def den = Math.sqrt(((sum1Sq-(sum1 * sum1))*(sum2Sq-(sum2 * sum2))).doubleValue())
-            println "den = $den"
             if(den == 0 || num == 0){
                 return 0.00
             }
 
             def r = num/den
-            println "r = $r"
             return r
 
         }

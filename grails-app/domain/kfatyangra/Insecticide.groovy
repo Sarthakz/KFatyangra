@@ -3,7 +3,7 @@ package kfatyangra
 class Insecticide {
     String name
     String description
-    String usages
+    String price
 
     static constraints = {
     }
